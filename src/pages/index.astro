@@ -1,106 +1,60 @@
 ---
 import MainLayout from '@/layouts/MainLayout.astro'
-import ShareButton from '@/components/ShareButton.astro'
-import SlideAnimationIcon from '@/components/SlideAnimationIcon.astro'
+import Buttons from '@/components/Buttons.astro'
 ---
 
 <MainLayout
   titlePage="Calendario de Eventos de la Comunidad | GYE TECH"
   descriptionPage="No te pierdas ningún evento de la comunidad tecnológica más grande del Ecuador, Guayaquil Tech.">
-  <h1 class="text-center font-bold text-2xl py-10 tracking-wider [text-wrap:balance] sm:text-4xl">
+  <h1 class="text-center font-bold text-2xl py-4 tracking-wider [text-wrap:balance] sm:text-4xl">
     CALENDARIO DE EVENTOS
     <span class="text-primary">2024</span>
   </h1>
-  <SlideAnimationIcon />
-  <section class="w-full overflow-auto">
-    <table class="mx-auto min-w-[57.5rem] w-max mb-4 border-b border-slate-100">
-      <thead class="bg-slate-100 text-slate-600">
-        <tr>
-          <th
-            class="px-8 py-6 w-max text-left text-sm leading-4 font-medium tracking-widest rounded-tl-md md:text-base">
-            FECHA
-          </th>
-          <th
-            class="px-8 py-6 w-max text-left text-sm leading-4 font-medium tracking-widest md:text-base">
-            EVENTO
-          </th>
-          <th
-            class="px-8 py-6 w-max text-left text-sm leading-4 font-medium tracking-widest md:text-base">
-            ORGANIZADOR
-          </th>
-          <th
-            class="px-8 py-6 w-max text-left text-sm leading-4 font-medium tracking-widest rounded-tr-md md:text-base">
-            INFORMACIÓN
-          </th>
-        </tr>
-      </thead>
-      <tbody id="events">
-        <!-- row container -->
-      </tbody>
-    </table>
+  <section id="events" class="flex flex-wrap justify-center gap-4 w-full min-h-[16rem]">
+    <!-- Events here -->
+    <svg
+      id="loading-spinner"
+      class="animate-spin m-auto h-14 w-14 text-primary"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24">
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"
+      ></circle>
+      <path
+        class="opacity-75"
+        fill="currentColor"
+        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+      ></path>
+    </svg>
   </section>
-  <svg
-    id="loading-spinner"
-    class="animate-spin mt-8 mx-auto h-14 w-14 text-primary"
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24">
-    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"
-    ></circle>
-    <path
-      class="opacity-75"
-      fill="currentColor"
-      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-    ></path>
-  </svg>
-  <section class="flex justify-center items-center gap-x-4 my-10">
-    <a
-      href="https://github.com/Guayaquil-Tech/calendario-de-eventos"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="flex justify-center items-center w-full max-w-[7.948rem] gap-x-2 bg-slate-300 text-slate-700 font-medium py-2 px-4 rounded-md transition-colors duration-100 shadow-sm shadow-slate-300/40 hover:bg-white/90">
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg">
-        <mask
-          id="mask0_124_3"
-          style="mask-type:luminance"
-          maskUnits="userSpaceOnUse"
-          x="0"
-          y="0"
-          width="24"
-          height="24">
-          <path d="M24 0H0V23.5102H24V0Z" fill="white"></path>
-        </mask>
-        <g mask="url(#mask0_124_3)">
-          <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
-            d="M11.9643 0C5.34832 0 0 5.38773 0 12.0531C0 17.3811 3.42686 21.8912 8.1808 23.4874C8.7752 23.6074 8.99291 23.2281 8.99291 22.909C8.99291 22.6295 8.97328 21.6717 8.97328 20.6738C5.64512 21.3923 4.95208 19.237 4.95208 19.237C4.41723 17.8401 3.62474 17.4811 3.62474 17.4811C2.53543 16.7427 3.70408 16.7427 3.70408 16.7427C4.91241 16.8225 5.54645 17.9799 5.54645 17.9799C6.61589 19.8157 8.33925 19.297 9.03259 18.9777C9.13152 18.1994 9.44864 17.6606 9.78539 17.3613C7.13093 17.0819 4.33812 16.0443 4.33812 11.4145C4.33812 10.0974 4.81323 9.01984 5.56603 8.18181C5.44725 7.88251 5.03118 6.64507 5.68507 4.98882C5.68507 4.98882 6.69525 4.66947 8.97307 6.22603C9.94827 5.96219 10.954 5.828 11.9643 5.82688C12.9745 5.82688 14.0043 5.96672 14.9552 6.22603C17.2332 4.66947 18.2434 4.98882 18.2434 4.98882C18.8973 6.64507 18.481 7.88251 18.3622 8.18181C19.1349 9.01984 19.5903 10.0974 19.5903 11.4145C19.5903 16.0443 16.7975 17.0618 14.1233 17.3613C14.5592 17.7404 14.9354 18.4587 14.9354 19.5963C14.9354 21.2126 14.9157 22.5098 14.9157 22.9087C14.9157 23.2281 15.1337 23.6074 15.7278 23.4877C20.4818 21.8909 23.9086 17.3811 23.9086 12.0531C23.9283 5.38773 18.5603 0 11.9643 0Z"
-            fill="#24292F"></path>
-        </g>
-      </svg>
-      <span class="text-center text-sm">GitHub</span>
-    </a>
-    <ShareButton />
-  </section>
+  <Buttons />
 </MainLayout>
 
 <script>
   // Spreadsheet ID and the name of the spreadsheet
-  // Demo ID: 1ZEMXCnbwTo0vrvKmQaIuaGC9QVGGRrRwKwGmM10Tx60
-  // Demo Sheet Name: 2023
   const SHEET_ID = '1ZEMXCnbwTo0vrvKmQaIuaGC9QVGGRrRwKwGmM10Tx60'
   const SHEET_NAME = '2024'
   // The URL of the spreadsheet to source data from. Make sure it is public or set to Anyone with link can view.
   const base = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?`
 
-  // select column names
+  // Select column names
   const SQL_QUERY = `SELECT A, B, C, D`
   const query = encodeURIComponent(SQL_QUERY)
+
+  const monthAbbreviation = [
+    'ENE',
+    'FEB',
+    'MAR',
+    'ABR',
+    'MAY',
+    'JUN',
+    'JUL',
+    'AGO',
+    'SEP',
+    'OCT',
+    'NOV',
+    'DIC'
+  ]
 
   const eventsContainer = document.getElementById('events')
   const loadingSpinner = document.getElementById('loading-spinner')
@@ -116,31 +70,55 @@ import SlideAnimationIcon from '@/components/SlideAnimationIcon.astro'
       loadingSpinner.remove()
 
       eventsContainer.innerHTML = spreadsheetRows
-        .map(row => {
+        .map((row, index) => {
+          const stringDate = row.c[0].v
+          const eventDate = new Date(stringDate.substring(5, stringDate.length - 1))
+          const eventDay = eventDate.getDate()
+          const eventMonth = eventDate.getMonth()
+
           return `
-          <tr class="transition-colors duration-100 hover:bg-primary/40">
-            <td class="px-8 py-6">
-              <p class="text-base leading-5 font-regular text-slate-100 md:text-lg">${
-                row.c[0].f
-              }</p>
-            </td>
-            <td class="px-8 py-6">
-              <p class="text-base leading-5 font-regular text-slate-100 md:text-lg">${
-                row.c[1].v
-              }</p>
-            </td>
-            <td class="px-8 py-6">
-              <p class="text-base leading-5 font-regular text-slate-100 md:text-lg">${
-                row.c[2].v
-              }</p>
-            </td>
-            <td class="px-2 py-4">
-              <a class="px-6 py-2 text-primary/70 font-medium underline underline-offset-2 transition-colors duration-100 hover:text-primary" href=${
-                row.c[3].v.includes('https://') ? row.c[3].v : `https://${row.c[3].v}`
-              } target="_blank" rel="noopener noreferrer">Regístrate aquí</a>
-            </td>  
-          </tr>
-        `
+            <article
+              class="w-full max-w-[300px] rounded-md border text-slate-300 border-primary/40 bg-white/20 transition-all duration-150 hover:scale-105 hover:shadow-sm hover:shadow-primary/40 hover:text-primary">
+              <a
+                class="relative inline-block w-full h-full p-4 space-y-4"
+                href=${row.c[3].v.includes('https://') ? row.c[3].v : `https://${row.c[3].v}`} 
+                target="_blank"
+                rel="noopener noreferrer">
+                <header class="flex justify-between items-center">
+                  <span class="text-4xl font-bold text-slate-300">#${index + 1}</span>
+                  <div class="w-max border rounded-md border-primary/40 text-center">
+                    <div class="bg-primary/40 text-sm rounded-t-md text-white backdrop-blur-sm px-4 py-1">${
+                      monthAbbreviation[eventMonth]
+                    }</div>
+                    <span class="block p-2 text-lg font-bold text-primary leading-tight">${eventDay}</span>
+                  </div>
+                </header>
+                <h2 class="text-2xl text-left text-balance font-semibold text-primary">${
+                  row.c[1].v
+                }</h2>
+                <section>
+                  <span class="inline-block text-slate-300 font-medium text-sm mb-2">Organizadores:</span>
+                  <ul class="text-white">
+                    ${row.c[2].v
+                      .split(',')
+                      .map(organizer => `<li>${organizer}</li>`)
+                      .join('')}
+                  </ul>
+                </section>
+                <svg
+                  class="absolute bottom-4 right-4"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M5 21C4.45 21 3.97917 20.8042 3.5875 20.4125C3.19583 20.0208 3 19.55 3 19V5C3 4.45 3.19583 3.97917 3.5875 3.5875C3.97917 3.19583 4.45 3 5 3H12V5H5V19H19V12H21V19C21 19.55 20.8042 20.0208 20.4125 20.4125C20.0208 20.8042 19.55 21 19 21H5ZM9.7 15.7L8.3 14.3L17.6 5H14V3H21V10H19V6.4L9.7 15.7Z"
+                    fill="currentColor"></path>
+                </svg>
+              </a>
+            </article>
+          `
         })
         .join('')
     })
