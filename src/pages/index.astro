@@ -42,7 +42,6 @@ import Buttons from '@/components/Buttons.astro'
   const query = encodeURIComponent(SQL_QUERY)
 
   const monthAbbreviation = [
-    'ENE',
     'FEB',
     'MAR',
     'ABR',
@@ -53,7 +52,8 @@ import Buttons from '@/components/Buttons.astro'
     'SEP',
     'OCT',
     'NOV',
-    'DIC'
+    'DIC',
+    'ENE'
   ]
 
   const eventsContainer = document.getElementById('events')
@@ -71,8 +71,12 @@ import Buttons from '@/components/Buttons.astro'
 
       eventsContainer.innerHTML = spreadsheetRows
         .map((row, index) => {
-          const stringDate = row.c[0].v
-          const eventDate = new Date(stringDate.substring(5, stringDate.length - 1))
+          const ResponseDate = row.c[0].v
+
+          const stringDate = ResponseDate.substring(5, ResponseDate.length - 1)
+          const dateArray = stringDate.split(',')
+          const eventDate = new Date(dateArray[0], dateArray[1] - 1, dateArray[2])
+
           const eventDay = eventDate.getDate()
           const eventMonth = eventDate.getMonth()
 
