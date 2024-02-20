@@ -10,10 +10,30 @@ import Buttons from '@/components/Buttons.astro'
     CALENDARIO DE EVENTOS
     <span class="text-primary">2024</span>
   </h1>
-  <section id="events" class="flex flex-wrap justify-center gap-4 w-full min-h-[16rem]">
+  <br>
+  <section id="eventsnow" class="flex flex-wrap justify-center gap-4 w-full min-h-[16rem]">
     <!-- Events here -->
     <svg
-      id="loading-spinner"
+      id="loading-spinnernow"
+      class="animate-spin m-auto h-14 w-14 text-primary"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24">
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"
+      ></circle>
+      <path
+        class="opacity-75"
+        fill="currentColor"
+        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+      ></path>
+    </svg>
+  </section>
+  <br>
+  <h3 class="text-center font-bold text-2xl py-4 tracking-wider [text-wrap:balance] sm:text-4xl" >Eventos pasados</h3>
+  <section id="eventslast" class="flex flex-wrap justify-center gap-4 w-full min-h-[16rem]">
+    <!-- Events here -->
+    <svg
+      id="loading-spinnerlast"
       class="animate-spin m-auto h-14 w-14 text-primary"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
@@ -56,8 +76,10 @@ import Buttons from '@/components/Buttons.astro'
     'ENE'
   ]
 
-  const eventsContainer = document.getElementById('events')
-  const loadingSpinner = document.getElementById('loading-spinner')
+  const eventsNowContainer = document.getElementById('eventsnow')
+  const eventsLastContainer = document.getElementById('eventslast')
+  const loadingSpinnerNow = document.getElementById('loading-spinnernow')
+  const loadingSpinnerLast = document.getElementById('loading-spinnerlast')
 
   fetch(`${base}&sheet=${SHEET_NAME}&tq=${query}`)
     .then(res => res.text())
@@ -67,20 +89,20 @@ import Buttons from '@/components/Buttons.astro'
 
       const spreadsheetRows = jsData.table.rows
 
-      loadingSpinner.remove()
+      loadingSpinnerNow.remove()
+      loadingSpinnerLast.remove()
 
-      eventsContainer.innerHTML = spreadsheetRows
+      spreadsheetRows
         .map((row, index) => {
           const ResponseDate = row.c[0].v
-
           const stringDate = ResponseDate.substring(5, ResponseDate.length - 1)
           const dateArray = stringDate.split(',')
           const eventDate = new Date(dateArray[0], dateArray[1] - 1, dateArray[2])
-
+          const eventDateComp = new Date(dateArray[0], dateArray[1], dateArray[2])
           const eventDay = eventDate.getDate()
           const eventMonth = eventDate.getMonth()
-
-          return `
+          const currentDate = new Date()
+          const event =  `
             <article
               class="w-full max-w-[300px] rounded-md border text-slate-300 border-primary/40 bg-white/20 transition-all duration-150 hover:scale-105">
               <a
@@ -123,8 +145,13 @@ import Buttons from '@/components/Buttons.astro'
               </a>
             </article>
           `
+          if(eventDateComp <= currentDate ){
+            eventsLastContainer.innerHTML += event
+          } else{
+            eventsNowContainer.innerHTML += event
+          }
+          
         })
-        .join('')
     })
     .catch(error => console.log(error))
 </script>
