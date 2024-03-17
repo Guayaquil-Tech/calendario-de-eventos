@@ -1,4 +1,5 @@
 ---
+import { ViewTransitions } from 'astro:transitions'
 import FooterPage from '@/components/FooterPage.astro'
 
 interface Props {
@@ -40,6 +41,7 @@ const { titlePage, descriptionPage } = Astro.props
       href='https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap'
       rel='stylesheet'
     />
+    <ViewTransitions />
   </head>
   <body
     class='bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-800 to-blue-950 min-h-screen'>

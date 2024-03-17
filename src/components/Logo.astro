@@ -15,10 +15,13 @@ const { className } = Astro.props
   alt='logo de guayaquiltech'
   width='50'
   height='50'
+  loading='eager'
 />
 
 <script>
-  document.getElementById('logo-header').addEventListener('click', () => {
-    window.location.href = '/'
+  document.addEventListener('astro:page-load', () => {
+    document.getElementById('logo-header').addEventListener('click', () => {
+      window.location.href = '/'
+    })
   })
 </script>
