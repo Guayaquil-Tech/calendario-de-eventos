@@ -6,14 +6,17 @@ import GithubIcon from '@/icons/GithubIcon.astro'
 const socialMedia = [
   {
     icon: InstagramIcon,
+    title: 'Instagram',
     link: 'https://www.instagram.com/guayaquiltech/'
   },
   {
     icon: LinkedinIcon,
+    title: 'LinkedIn',
     link: 'https://www.linkedin.com/company/guayaquiltech/'
   },
   {
     icon: GithubIcon,
+    title: 'GitHub',
     link: 'https://github.com/Guayaquil-Tech'
   }
 ]
@@ -28,7 +31,9 @@ const socialMedia = [
           href={social.link}
           class='w-max p-2 text-slate-300 hover:text-primary transition-colors'
           target='_blank'
+          title={social.title}
           rel='noopener'>
+          <small class='sr-only'>{social.title}</small>
           <social.icon className='w-8 h-8' />
         </a>
       ))
