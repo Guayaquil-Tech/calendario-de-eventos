@@ -1,0 +1,155 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro'
+import HeaderPage from '@/components/HeaderPage.astro'
+---
+
+<MainLayout
+  titlePage='Calendario de Eventos de la Comunidad | GYE TECH'
+  descriptionPage='No te pierdas ningún evento de la comunidad tecnológica más grande del Ecuador, Guayaquil Tech.'>
+  <HeaderPage>
+    Calendario de <span class='text-primary'>Eventos</span> 2024
+  </HeaderPage>
+
+  <section id='eventsnow' class='flex flex-wrap justify-center gap-4 mt-4 w-full min-h-[16rem]'>
+    <!-- Events here -->
+    <svg
+      id='loading-spinnernow'
+      class='animate-spin m-auto h-14 w-14 text-primary'
+      xmlns='http://www.w3.org/2000/svg'
+      fill='none'
+      viewBox='0 0 24 24'>
+      <circle class='opacity-25' cx='12' cy='12' r='10' stroke='currentColor' stroke-width='4'
+      ></circle>
+      <path
+        class='opacity-75'
+        fill='currentColor'
+        d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
+      ></path>
+    </svg>
+  </section>
+
+  <h3 class='text-center font-bold text-2xl py-4 tracking-wider [text-wrap:balance] sm:text-4xl'>
+    Eventos pasados
+  </h3>
+  <section id='eventslast' class='flex flex-wrap justify-center gap-4 w-full min-h-[16rem]'>
+    <!-- Events here -->
+    <svg
+      id='loading-spinnerlast'
+      class='animate-spin m-auto h-14 w-14 text-primary'
+      xmlns='http://www.w3.org/2000/svg'
+      fill='none'
+      viewBox='0 0 24 24'>
+      <circle class='opacity-25' cx='12' cy='12' r='10' stroke='currentColor' stroke-width='4'
+      ></circle>
+      <path
+        class='opacity-75'
+        fill='currentColor'
+        d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
+      ></path>
+    </svg>
+  </section>
+</MainLayout>
+
+<script>
+  // Spreadsheet ID and the name of the spreadsheet
+  const SHEET_ID = '1ZEMXCnbwTo0vrvKmQaIuaGC9QVGGRrRwKwGmM10Tx60'
+  const SHEET_NAME = '2024'
+  // The URL of the spreadsheet to source data from. Make sure it is public or set to Anyone with link can view.
+  const base = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?`
+
+  // Select column names
+  const SQL_QUERY = `SELECT A, B, C, D`
+  const query = encodeURIComponent(SQL_QUERY)
+
+  const monthAbbreviation = [
+    'FEB',
+    'MAR',
+    'ABR',
+    'MAY',
+    'JUN',
+    'JUL',
+    'AGO',
+    'SEP',
+    'OCT',
+    'NOV',
+    'DIC',
+    'ENE'
+  ]
+
+  const eventsNowContainer = document.getElementById('eventsnow')
+  const eventsLastContainer = document.getElementById('eventslast')
+  const loadingSpinnerNow = document.getElementById('loading-spinnernow')
+  const loadingSpinnerLast = document.getElementById('loading-spinnerlast')
+
+  fetch(`${base}&sheet=${SHEET_NAME}&tq=${query}`)
+    .then(res => res.text())
+    .then(rep => {
+      const jsonString = rep.substring(rep.indexOf('{'), rep.lastIndexOf('}') + 1)
+      const jsData = JSON.parse(jsonString)
+
+      const spreadsheetRows = jsData.table.rows
+
+      loadingSpinnerNow.remove()
+      loadingSpinnerLast.remove()
+
+      spreadsheetRows.map((row, index) => {
+        const ResponseDate = row.c[0].v
+        const stringDate = ResponseDate.substring(5, ResponseDate.length - 1)
+        const dateArray = stringDate.split(',')
+        const eventDate = new Date(dateArray[0], dateArray[1] - 1, dateArray[2])
+        const eventDateComp = new Date(dateArray[0], dateArray[1], dateArray[2])
+        const eventDay = eventDate.getDate()
+        const eventMonth = eventDate.getMonth()
+        const currentDate = new Date()
+        const event = `
+            <article
+              class="w-full max-w-[300px] rounded-md border text-slate-300 border-primary/40 bg-white/20 transition-all duration-150 hover:scale-105">
+              <a
+                class="relative inline-block w-full h-full p-4 space-y-4"
+                href=${row.c[3].v.includes('https://') ? row.c[3].v : `https://${row.c[3].v}`} 
+                target="_blank"
+                rel="noopener noreferrer">
+                <header class="flex justify-between items-center">
+                  <span class="text-4xl font-bold text-slate-300">#${index + 1}</span>
+                  <div class="w-max border rounded-md border-primary/40 text-center">
+                    <div class="bg-primary/40 text-sm rounded-t-md text-white backdrop-blur-sm px-4 py-1">${
+                      monthAbbreviation[eventMonth]
+                    }</div>
+                    <span class="block p-2 text-lg font-bold text-primary leading-tight">${eventDay}</span>
+                  </div>
+                </header>
+                <h2 class="text-2xl text-left text-balance font-semibold text-primary">${
+                  row.c[1].v
+                }</h2>
+                <section>
+                  <span class="inline-block text-slate-300 font-medium text-sm mb-2">Organizadores:</span>
+                  <ul class="text-white">
+                    ${row.c[2].v
+                      .split(',')
+                      .map(organizer => `<li>${organizer}</li>`)
+                      .join('')}
+                  </ul>
+                </section>
+                <svg
+                  class="absolute bottom-4 right-4"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M5 21C4.45 21 3.97917 20.8042 3.5875 20.4125C3.19583 20.0208 3 19.55 3 19V5C3 4.45 3.19583 3.97917 3.5875 3.5875C3.97917 3.19583 4.45 3 5 3H12V5H5V19H19V12H21V19C21 19.55 20.8042 20.0208 20.4125 20.4125C20.0208 20.8042 19.55 21 19 21H5ZM9.7 15.7L8.3 14.3L17.6 5H14V3H21V10H19V6.4L9.7 15.7Z"
+                    fill="currentColor"></path>
+                </svg>
+              </a>
+            </article>
+          `
+        if (eventDateComp <= currentDate) {
+          eventsLastContainer.innerHTML += event
+        } else {
+          eventsNowContainer.innerHTML += event
+        }
+      })
+    })
+    .catch(error => console.log(error))
+</script>

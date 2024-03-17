@@ -1,0 +1,24 @@
+---
+import { Image } from 'astro:assets'
+
+interface Props {
+  className?: string
+}
+
+const { className } = Astro.props
+---
+
+<Image
+  id='logo-header'
+  class={`${className} cursor-pointer`}
+  src='/gyetech-logo.webp'
+  alt='logo de guayaquiltech'
+  width='50'
+  height='50'
+/>
+
+<script>
+  document.getElementById('logo-header').addEventListener('click', () => {
+    window.location.href = '/'
+  })
+</script>

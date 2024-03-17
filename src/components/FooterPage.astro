@@ -1,3 +1,37 @@
-<footer>
-  <h2 class="sr-only">Calendario - Listado de eventos de Guayaquil Tech</h2>
+---
+import InstagramIcon from '@/icons/InstagramIcon.astro'
+import LinkedinIcon from '@/icons/LinkedinIcon.astro'
+import GithubIcon from '@/icons/GithubIcon.astro'
+
+const socialMedia = [
+  {
+    icon: InstagramIcon,
+    link: 'https://www.instagram.com/guayaquiltech/'
+  },
+  {
+    icon: LinkedinIcon,
+    link: 'https://www.linkedin.com/company/guayaquiltech/'
+  },
+  {
+    icon: GithubIcon,
+    link: 'https://github.com/Guayaquil-Tech'
+  }
+]
+---
+
+<footer class='mx-auto w-full max-w-screen-2xl h-max p-4 text-white lg:px-6'>
+  <h4 class='text-center mb-2 text-slate-300'>Encuentrános en</h4>
+  <section class='flex justify-center items-center gap-2 mx-auto'>
+    {
+      socialMedia.map(social => (
+        <a
+          href={social.link}
+          class='w-max p-2 text-slate-300 hover:text-primary transition-colors'
+          target='_blank'
+          rel='noopener'>
+          <social.icon className='w-8 h-8' />
+        </a>
+      ))
+    }
+  </section>
 </footer>
