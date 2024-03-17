@@ -2,6 +2,7 @@ import GithubIcon from '@/icons/GithubIcon.astro'
 import InstagramIcon from '@/icons/InstagramIcon.astro'
 import LinkedinIcon from '@/icons/LinkedinIcon.astro'
 import GlobeIcon from '@/icons/GlobeIcon.astro'
+import GitlabIcon from '@/icons/GitlabIcon.astro'
 
 const Communities = [
   {
@@ -20,6 +21,11 @@ const Communities = [
         icon: LinkedinIcon,
         title: 'Linkedin',
         link: 'https://www.linkedin.com/company/openlabec'
+      },
+      {
+        icon: GitlabIcon,
+        title: 'GitLab',
+        link: 'https://gitlab.com/openlabec'
       },
       {
         icon: GlobeIcon,
