@@ -1,0 +1,42 @@
+---
+import { ViewTransitions } from 'astro:transitions'
+
+interface Props {
+  titlePage: string
+  descriptionPage: string
+}
+
+const { titlePage, descriptionPage } = Astro.props
+---
+
+<head>
+  <meta charset='UTF-8' />
+  <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+  <link rel='icon' type='image/png' href='/favicon.png' />
+  <title>{titlePage}</title>
+  <meta name='title' content={titlePage} />
+  <meta name='description' content={descriptionPage} />
+  <meta property='og:type' content='website' />
+  <!-- <meta property="og:url" content=`https:// /${currentUrl ?? null}` /> -->
+  <meta property='og:title' content={titlePage} />
+  <meta property='og:description' content={descriptionPage} />
+  <meta
+    property='og:image'
+    content='https://i.postimg.cc/y8y4ZKMw/calendario-eventos-gyetech.png'
+  />
+  <meta property='twitter:card' content='summary_large_image' />
+  <!-- <meta property="twitter:url" content=`https:// /${currentUrl ?? null}` /> -->
+  <meta property='twitter:title' content={titlePage} />
+  <meta property='twitter:description' content={descriptionPage} />
+  <meta
+    property='twitter:image'
+    content='https://i.postimg.cc/y8y4ZKMw/calendario-eventos-gyetech.png'
+  />
+  <link rel='preconnect' href='https://fonts.googleapis.com' />
+  <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
+  <link
+    href='https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap'
+    rel='stylesheet'
+  />
+  <ViewTransitions />
+</head>

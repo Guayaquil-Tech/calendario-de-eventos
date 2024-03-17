@@ -1,0 +1,25 @@
+---
+import CommunityLayout from '@/layouts/CommunityLayout.astro'
+import Communities from '@/data/communities'
+import { getCommunityById } from '@/services/communityService'
+
+const { id } = Astro.params
+
+let community
+
+if (id) community = await getCommunityById(id)
+
+export function getStaticPaths() {
+  return Communities.map(community => ({
+    params: {
+      id: community.id
+    }
+  }))
+}
+---
+
+<CommunityLayout
+  titlePage={`${community.name} | GUAYAQUIL TECH`}
+  descriptionPage={community.description}
+  community={community}
+/>

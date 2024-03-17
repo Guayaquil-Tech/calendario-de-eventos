@@ -1,12 +1,32 @@
 ---
+import { Image } from 'astro:assets'
 import MainLayout from '@/layouts/MainLayout.astro'
 import HeaderPage from '@/components/HeaderPage.astro'
+
+import Communities from '@/data/communities.js'
 ---
 
 <MainLayout
-  titlePage='Calendario de Eventos de la Comunidad | GYE TECH'
-  descriptionPage='No te pierdas ningún evento de la comunidad tecnológica más grande del Ecuador, Guayaquil Tech.'>
+  titlePage='Comunidades | GUAYAQUIL TECH'
+  descriptionPage='Descubre a las comunidades más geniales del mundo Tech'>
   <HeaderPage>
     Listado de <span class='text-primary'>Comunidades</span>
   </HeaderPage>
+
+  <section class='my-8 flex flex-wrap items-center justify-center gap-12 lg:mt-10'>
+    {
+      Communities.map(co => (
+        <a href={co.id} title={co.name}>
+          <Image
+            class='w-full max-w-[160px] rounded-md cursor-pointer transition-all duration-150 hover:scale-105'
+            src={`/images/communities/${co.imagePath}`}
+            alt={co.name}
+            width='50'
+            height='50'
+            loading='eager'
+          />
+        </a>
+      ))
+    }
+  </section>
 </MainLayout>
