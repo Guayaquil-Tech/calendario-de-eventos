@@ -8,20 +8,13 @@ interface Props {
 const { className } = Astro.props
 ---
 
-<Image
-  id='logo-header'
-  class={`${className} cursor-pointer`}
-  src='/gyetech-logo.webp'
-  alt='logo de guayaquiltech'
-  width='50'
-  height='50'
-  loading='eager'
-/>
-
-<script>
-  document.addEventListener('astro:page-load', () => {
-    document.getElementById('logo-header').addEventListener('click', () => {
-      window.location.href = '/'
-    })
-  })
-</script>
+<a href='/'>
+  <Image
+    class={`${className} cursor-pointer`}
+    src='/gyetech-logo.webp'
+    alt='logo de guayaquiltech'
+    width='50'
+    height='50'
+    loading='eager'
+  />
+</a>
