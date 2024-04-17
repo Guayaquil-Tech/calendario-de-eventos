@@ -3,6 +3,7 @@ import axios from 'axios'
 import { ParseData } from '../Helpers/Sheets'
 import Event from '@/components/Event'
 import moment from 'moment'
+import "./listevents.css"
 
 export default function ListEvents() {
   //Data
@@ -118,7 +119,7 @@ export default function ListEvents() {
                         }
                       }}
                       style={{ color: 'white' }}
-                      className="mt-2 block w-full rounded-md border border-gray-200 px-2 py-2 outline-none focus:border-blue-500 bg-white/20"
+                      className="mt-2 block w-full rounded-md border border-gray-200 px-2 py-2 outline-none text-white focus:border-blue-500 bg-white/20"
                     />
                   </div>
 
@@ -193,7 +194,8 @@ export default function ListEvents() {
             </div>
           </section>
 
-          <section className="flex flex-wrap justify-center gap-4 mt-4 w-full min-h-[16rem]">
+
+          <section className="flex flex-wrap justify-center gap-4 w-full min-h-[16rem]">
             {events
               .filter(event => event.dateComp >= new Date())
               .filter(event =>
@@ -214,7 +216,8 @@ export default function ListEvents() {
                 <Event key={index} index={index} data={event}></Event>
               ))}
           </section>
-          <div className="divide-y divide-neutral-200 w-full min-h-[16rem] mx-auto mt-8">
+
+          <div className="divide-y divide-neutral-200 w-full min-h-[10rem] mx-auto mt-8">
             <div className="py-5">
               <details className="group">
                 <summary className="flex justify-between items-center cursor-pointer list-none">
@@ -237,7 +240,7 @@ export default function ListEvents() {
                     </svg>
                   </span>
                 </summary>
-                <section className="flex flex-wrap justify-center gap-4 mt-4 w-full min-h-[16rem]">
+                <section className="flex flex-wrap justify-center gap-4 mt-4 w-full">             
                   {events
                     .filter(event => event.dateComp < new Date())
                     .map((event, index) => (

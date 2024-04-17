@@ -3,6 +3,7 @@ import InstagramIcon from '@/icons/InstagramIcon.astro'
 import LinkedinIcon from '@/icons/LinkedinIcon.astro'
 import GlobeIcon from '@/icons/GlobeIcon.astro'
 import GitlabIcon from '@/icons/GitlabIcon.astro'
+import YoutubeIcon from '@/icons/YoutubeIcon.astro'
 
 const Communities = [
   {
@@ -67,6 +68,37 @@ const Communities = [
       }
     ],
     imagePath: 'dotnet-ecuador.webp'
+  },
+  {
+    id: 'naanbits',
+    name: 'Naanbits',
+    description:
+      'Espacio para personas interesadas en el mundo del desarrollo de Software, Cloud y Seguridad.',
+    tags: [
+      'Security',
+      'Cloud',
+      'Incident Response',
+      'Mentorship',
+      'Development'
+    ],
+    social: [
+      {
+        icon: InstagramIcon,
+        title: 'Instagram',
+        link: 'https://www.instagram.com/naanbits'
+      },
+      {
+        icon: LinkedinIcon,
+        title: 'Linkedin',
+        link: 'https://www.linkedin.com/company/naanbits/'
+      },
+      {
+        icon: YoutubeIcon,
+        title: 'Github',
+        link: 'https://youtube.com/@naanbits'
+      }
+    ],
+    imagePath: 'naanbits.svg'
   }
 ]
 
