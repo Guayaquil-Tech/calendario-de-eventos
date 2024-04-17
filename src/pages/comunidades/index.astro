@@ -18,7 +18,7 @@ import Communities from '@/data/communities.js'
       Communities.map(co => (
         <a href={co.id} title={co.name}>
           <Image
-            class='w-full max-w-[7.5rem] rounded-md cursor-pointer transition-all duration-150 hover:scale-105'
+            class='w-full max-w-[7.5rem] rounded-md cursor-pointer transition-all select-none duration-150 hover:scale-105'
             src={`/images/communities/${co.imagePath}`}
             alt={co.name}
             width='50'

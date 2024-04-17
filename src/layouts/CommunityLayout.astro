@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets'
 import BaseHead from '@/components/BaseHead.astro'
 import BaseBodyLayout from '@/layouts/BaseBodyLayout.astro'
-import BackArrowIcon from '@/icons/BackArrowIcon.astro'
+import BackArrowButton from '@/components/BackArrowButton.astro'
 
 interface Props {
   titlePage: string
@@ -29,15 +29,6 @@ const { titlePage, descriptionPage, community } = Astro.props
   <BaseBodyLayout>
     <section
       class='flex flex-col max-w-screen-lg mx-auto gap-6 py-4 justify-center items-center min-h-screen'>
-      <div class='w-full'>
-        <a
-          href='/comunidades/'
-          class='w-max flex justify-center items-center gap-2 p-4 text-slate-200 font-medium hover:underline hover:underline-offset-2 transition-all'>
-          <BackArrowIcon className='w-4 h-4 inline-block' />
-          <span>Regresar</span>
-        </a>
-      </div>
-
       <section
         class='flex flex-col items-start px-6 py-10 w-full bg-blue-950/80 border border-blue-950 rounded-md backdrop-blur-md md:flex-row gap-10'>
         <Image
@@ -81,6 +72,9 @@ const { titlePage, descriptionPage, community } = Astro.props
           </section>
         </article>
       </section>
+      <div class='w-full flex justify-center items-center'>
+        <BackArrowButton link='/comunidades/' text='Lista de Comunidades' />
+      </div>
     </section>
   </BaseBodyLayout>
 </html>
