@@ -2,14 +2,13 @@
 import MainLayout from '@/layouts/MainLayout.astro'
 import HeaderPage from '@/components/HeaderPage.astro'
 import ListEvent from '@/components/ListEvents.jsx'
-
-const year = new Date().getFullYear()
 ---
+
 <MainLayout
-  titlePage="Calendario de Eventos de la Comunidad | GYE TECH"
-  descriptionPage="No te pierdas ningún evento de la comunidad tecnológica más grande del Ecuador, Guayaquil Tech.">
+  titlePage='Calendario de Eventos de la Comunidad | GYE TECH'
+  descriptionPage='No te pierdas ningún evento de la comunidad tecnológica más grande del Ecuador, Guayaquil Tech.'>
   <HeaderPage>
-    Calendario de <span class="text-primary">Eventos</span> &nbsp;{year}
+    Calendario de <span class='text-primary'>Eventos</span>
   </HeaderPage>
-  <ListEvent client:load></ListEvent>
+  <ListEvent client:load />
 </MainLayout>
