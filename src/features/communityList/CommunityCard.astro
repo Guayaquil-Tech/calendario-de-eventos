@@ -1,0 +1,54 @@
+---
+import { Image } from 'astro:assets'
+import type { Community } from '@/types'
+
+interface Props {
+  community: Community
+}
+
+const { community } = Astro.props
+---
+
+<section
+  class='flex flex-col items-start px-6 py-10 w-full bg-blue-950/80 border border-blue-950 rounded-md backdrop-blur-md md:flex-row gap-10'>
+  <Image
+    class='w-full max-w-xs mx-auto rounded-md'
+    src={`/images/communities/${community.imagePath}`}
+    alt={community.name}
+    width='50'
+    height='50'
+    loading='eager'
+  />
+
+  <article>
+    <h1 class='text-white text-xl mb-4 font-medium sm:text-4xl'>{community.name}</h1>
+    <section class='flex flex-wrap items-center gap-2 mb-4'>
+      {
+        community.tags.map(tag => (
+          <small class='p-1 font-medium rounded-md backdrop-blur-md border border-primary/20 text-primary animate-pulse duration-500'>
+            {tag}
+          </small>
+        ))
+      }
+    </section>
+    <p class='mb-6 text-slate-200 max-w-xl'>
+      {community.description}
+    </p>
+    <h3 class='text-slate-400 font-medium mb-4'>Síguenos en</h3>
+    <section class='flex flex-wrap justify-start items-center gap-4'>
+      {
+        community.social.map(social => (
+          <a
+            href={social.link}
+            class='w-max p-2 text-slate-300 hover:text-primary transition-colors'
+            target='_blank'
+            title={social.title}
+            rel='noopener'>
+            <small class='sr-only'>{social.title}</small>
+            <social.icon className='w-10 h-10' />
+          </a>
+        ))
+      }
+    </section>
+  </article>
+</section>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { ParseData } from '../Helpers/Sheets'
-import Event from '@/components/Event'
+import { ParseData } from '../../helpers/Sheets'
+import Event from '@/features/eventsList/Event'
 import moment from 'moment'
 import "./listevents.css"
 
